@@ -34,6 +34,12 @@
       } else if (target.matches('#platzi-close-notes-list-button')) {
         event.preventDefault();
         closeNotesListArea();
+      } else if (target.matches('.platzi-save-comment-button')) {
+        event.preventDefault();
+        const commentElement = target.closest('.Comment_Comment__pyWmK');
+        if (commentElement) {
+          saveCommentAsNote(commentElement);
+        }
       }
     }
   
@@ -322,14 +328,13 @@
         // Obtener información del curso y la clase
         const classTitleElement = document.querySelector('h1[class*="MaterialDesktopHeading-info__title"]');
         const courseInfoElement = document.querySelector('p[class*="MaterialDesktopHeading-info__description"]');
-
   
         const classTitle = classTitleElement ? classTitleElement.textContent : "Clase desconocida";
         const courseInfo = courseInfoElement ? courseInfoElement.textContent : "Curso desconocido";
   
         chrome.storage.local.get({ allPlatziNotes: [] }, (result) => {
           const notesArray = result.allPlatziNotes;
-        
+  
           if (editingNoteId !== null) {
             // Actualizar nota existente
             const noteIndex = notesArray.findIndex(note => note.id === editingNoteId);
@@ -422,17 +427,130 @@
       editingNoteId = null;
     }
   
-    // Observador de mutaciones para detectar cambios en el DOM
+    // Función para agregar botones "Guardar como nota" a los comentarios
+    function addSaveNoteButtons() {
+      const comments = document.querySelectorAll('.Comment_Comment__pyWmK');
+      comments.forEach((comment) => {
+        // Verificar si el botón ya existe
+        if (comment.querySelector('.platzi-save-comment-button')) {
+          return; // Botón ya agregado
+        }
+  
+        // Crear el botón
+        const saveButton = document.createElement('button');
+        saveButton.className = 'Button platzi-save-comment-button';
+        saveButton.innerText = 'Guardar como nota';
+  
+        // Estilos opcionales para el botón
+        saveButton.style.marginTop = '5px';
+        saveButton.style.padding = '5px 10px';
+        saveButton.style.backgroundColor = '#0070f3';
+        saveButton.style.color = '#fff';
+        saveButton.style.border = 'none';
+        saveButton.style.borderRadius = '4px';
+        saveButton.style.cursor = 'pointer';
+  
+        // Agregar el botón al pie del comentario
+        const commentFooter = comment.querySelector('.Comment_Comment-footer__3_iVr');
+        if (commentFooter) {
+          commentFooter.appendChild(saveButton);
+        } else {
+          // Si no se encuentra el footer, agregar al final del comentario
+          comment.appendChild(saveButton);
+        }
+      });
+    }
+  
+    // Función para guardar un comentario como nota
+    function saveCommentAsNote(commentElement) {
+      // Obtener el contenido del comentario
+      const contentElement = commentElement.querySelector('.Comment_Comment-message__fyscQ .Markdown_Markdown__k5sxI');
+      const commentContent = contentElement ? contentElement.innerText.trim() : '';
+  
+      if (commentContent) {
+        // Obtener el nombre del autor
+        const authorElement = commentElement.querySelector('.Comment_Comment-name__JuvPY');
+        const authorName = authorElement ? authorElement.innerText.trim() : 'Autor desconocido';
+  
+        // Obtener información del curso y la clase
+        const classTitleElement = document.querySelector('h1[class*="MaterialDesktopHeading-info__title"]');
+        const courseInfoElement = document.querySelector('p[class*="MaterialDesktopHeading-info__description"]');
+  
+        const classTitle = classTitleElement ? classTitleElement.textContent : "Clase desconocida";
+        const courseInfo = courseInfoElement ? courseInfoElement.textContent : "Curso desconocido";
+  
+        chrome.storage.local.get({ allPlatziNotes: [] }, (result) => {
+          const notesArray = result.allPlatziNotes;
+  
+          // Generar un ID único para la nueva nota
+          const noteId = generateUniqueId();
+  
+          // Crear el objeto de la nota
+          const newNote = {
+            id: noteId,
+            class: classTitle,
+            course: courseInfo,
+            content: `Comentario de ${authorName}:\n\n${commentContent}`
+          };
+  
+          notesArray.push(newNote);
+          chrome.storage.local.set({ allPlatziNotes: notesArray }, () => {
+            alert("¡Comentario guardado como nota!");
+          });
+        });
+      } else {
+        alert("No se pudo obtener el contenido del comentario.");
+      }
+    }
+  
+    // Observador de mutaciones para monitorear la sección de comentarios
+    function observeComments() {
+      const commentsContainer = document.querySelector('.Comments_Comments__FE6Fi');
+      if (commentsContainer) {
+        // Agregar botones a los comentarios existentes
+        addSaveNoteButtons();
+  
+        const commentsObserver = new MutationObserver((mutations) => {
+          mutations.forEach((mutation) => {
+            if (mutation.type === 'childList') {
+              // Nuevos comentarios agregados
+              addSaveNoteButtons();
+            }
+          });
+        });
+  
+        commentsObserver.observe(commentsContainer, {
+          childList: true,
+          subtree: true
+        });
+      }
+    }
+  
+    // Observador de mutaciones para detectar cuando aparece la sección de comentarios
+    const domObserver = new MutationObserver((mutations, obs) => {
+      const commentsContainer = document.querySelector('.Comments_Comments__FE6Fi');
+      if (commentsContainer) {
+        observeComments();
+        obs.disconnect(); // Dejar de observar una vez encontrada la sección de comentarios
+      }
+    });
+  
+    // Iniciar la observación del DOM
+    domObserver.observe(document.body, {
+      childList: true,
+      subtree: true
+    });
+  
+    // Observador de mutaciones para detectar cambios en el DOM y agregar la pestaña de notas
     const observer = new MutationObserver((mutations, obs) => {
       const tabList = document.querySelector('div[role="tablist"]');
-      console.log(tabList);
       if (tabList) {
         addNotesTab();
         obs.disconnect(); // Dejar de observar una vez que se ha agregado el botón
       }
     });
   
-    // Configurar el observador
+    // Configurar el observador para la pestaña de notas
     observer.observe(document.body, {
       childList: true,
       subtree: true
