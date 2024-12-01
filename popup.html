@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Notas de Platzi</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 10px;
+      max-width: 300px;
+    }
+    ul {
+      padding: 0;
+      list-style: none;
+    }
+    li {
+      margin-bottom: 5px;
+      background-color: #f1f1f1;
+      padding: 5px;
+      border-radius: 3px;
+    }
+    button {
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h3>Mis Notas</h3>
+  <ul id="notes-list"></ul>
+  <button id="clear-notes">Borrar todas las notas</button>
+  <script>
+    const list = document.getElementById("notes-list");
+    const clearButton = document.getElementById("clear-notes");
+
+    // Función para cargar las notas
+    function loadNotes() {
+        
+      chrome.storage.local.get({ notes: [] }, (result) => {
+        list.innerHTML = '';
+        const notes = result.notes;
+        notes.forEach((note, index) => {
+          const li = document.createElement("li");
+          li.textContent = note;
+          list.appendChild(li);
+        });
+      });
+    }
+
+    // Evento para borrar todas las notas
+    clearButton.addEventListener("click", () => {
+      if (confirm("¿Estás seguro de que deseas borrar todas las notas?")) {
+        chrome.storage.local.set({ notes: [] }, () => {
+          loadNotes();
+        });
+      }
+    });
+
+    // Cargar las notas al abrir el popup
+    loadNotes();
+  </script>
+</body>
+</html>
