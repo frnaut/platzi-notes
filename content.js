@@ -257,7 +257,7 @@
   
       // Cargar las notas guardadas
       chrome.storage.local.get({ allPlatziNotes: [] }, (result) => {
-        const notesArray = result.allPlatziNotes;
+        let notesArray = result.allPlatziNotes;
         const notesList = document.getElementById("platzi-notes-list");
         notesList.innerHTML = ''; // Limpiar la lista
   
@@ -266,6 +266,13 @@
           noNotesMessage.innerText = "No tienes notas guardadas.";
           notesList.appendChild(noNotesMessage);
         } else {
+          // Ordenar las notas por timestamp en orden descendente
+          notesArray.sort((a, b) => {
+            const dateA = new Date(a.timestamp || 0);
+            const dateB = new Date(b.timestamp || 0);
+            return dateB - dateA; // Más recientes primero
+          });
+  
           notesArray.forEach((note) => {
             const listItem = document.createElement("li");
             listItem.style.borderBottom = "1px solid #ccc";
@@ -340,6 +347,7 @@
             const noteIndex = notesArray.findIndex(note => note.id === editingNoteId);
             if (noteIndex !== -1) {
               notesArray[noteIndex].content = noteContent;
+              notesArray[noteIndex].timestamp = new Date().toISOString(); // Actualizar el timestamp
               alert("¡Nota actualizada!");
             }
             editingNoteId = null; // Reiniciar el ID de edición
@@ -352,7 +360,8 @@
               id: noteId,
               class: classTitle,
               course: courseInfo,
-              content: noteContent
+              content: noteContent,
+              timestamp: new Date().toISOString() // Agregar timestamp
             };
   
             // Verificar si ya existe una nota con el mismo curso y clase
@@ -490,7 +499,8 @@
             id: noteId,
             class: classTitle,
             course: courseInfo,
-            content: `Comentario de ${authorName}:\n\n${commentContent}`
+            content: `Comentario de ${authorName}:\n\n${commentContent}`,
+            timestamp: new Date().toISOString() // Agregar timestamp
           };
   
           notesArray.push(newNote);
