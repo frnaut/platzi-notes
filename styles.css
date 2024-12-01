@@ -1,0 +1,82 @@
+/* styles.css */
+
+/* Estilos para el botón de la pestaña de notas */
+#platzi-notes-tab {
+    /* Puedes agregar estilos personalizados aquí si lo deseas */
+  }
+  
+  /* Estilos para el área de notas */
+  #platzi-notes-area {
+    /* Ajustes adicionales si es necesario */
+  }
+  
+  /* Estilo para el textarea */
+  #platzi-notes-textarea {
+    font-size: 16px;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  /* Estilos para los botones dentro del área de notas */
+  #platzi-notes-area button {
+    padding: 5px 10px;
+    background-color: #0070f3;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  #platzi-notes-area button:hover {
+    background-color: #005bb5;
+  }
+  
+  /* Contenedor de botones en el área de notas */
+  #platzi-notes-area div {
+    display: flex;
+    gap: 5px;
+  }
+  
+  /* Estilos para el área de la lista de notas */
+  #platzi-notes-list-area {
+    /* Puedes agregar estilos personalizados aquí si lo deseas */
+  }
+  
+  /* Estilos para los elementos de la lista de notas */
+  #platzi-notes-list li {
+    padding: 10px 0;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  #platzi-notes-list p {
+    margin: 0;
+    flex: 1;
+  }
+  
+  #platzi-notes-list button {
+    padding: 5px 10px;
+    background-color: #0070f3;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  #platzi-notes-list button:hover {
+    background-color: #005bb5;
+  }
+  
+  /* Contenedor de botones en la lista de notas */
+  #platzi-notes-list li div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  /* Estilos para la información del curso y clase */
+  #platzi-notes-list li p {
+    margin: 0;
+  }
+  
