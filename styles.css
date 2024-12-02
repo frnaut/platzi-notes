@@ -8,6 +8,7 @@
   /* Estilos para el área de notas */
   #platzi-notes-area {
     /* Ajustes adicionales si es necesario */
+    background-color: #1E2229;
   }
   
   /* Estilo para el textarea */
@@ -17,12 +18,14 @@
     box-sizing: border-box;
     border: 1px solid #ccc;
     border-radius: 4px;
+    background-color: #2D323A;
+    color: white;
   }
   
   /* Estilos para los botones dentro del área de notas */
   #platzi-notes-area button {
     padding: 5px 10px;
-    background-color: #0070f3;
+    background-color: #2D323A;
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -30,7 +33,7 @@
   }
   
   #platzi-notes-area button:hover {
-    background-color: #005bb5;
+    background-color: #31353b;
   }
   
   /* Contenedor de botones en el área de notas */
@@ -42,12 +45,16 @@
   /* Estilos para el área de la lista de notas */
   #platzi-notes-list-area {
     /* Puedes agregar estilos personalizados aquí si lo deseas */
+    color: white;
   }
   
   /* Estilos para los elementos de la lista de notas */
   #platzi-notes-list li {
-    padding: 10px 0;
-    border-bottom: 1px solid #ccc;
+    padding: 10px 10px;
+    background-color: #2D323A;
+    border-radius: 8px;
+    margin-bottom: 5px;
+    color: white;
   }
   
   #platzi-notes-list p {
@@ -57,7 +64,7 @@
   
   #platzi-notes-list button {
     padding: 5px 10px;
-    background-color: #0070f3;
+    background-color: #1E2229;
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -65,7 +72,16 @@
   }
   
   #platzi-notes-list button:hover {
-    background-color: #005bb5;
+    background-color: #272b32;
+  }
+
+  #platzi-close-notes-list-button {
+    color: white;
+    background-color: #1E2229;
+    height: 30px;
+    border: 1px solid #34383d;
+    border-radius: 4px;
+    margin-top: 5px;
   }
   
   /* Contenedor de botones en la lista de notas */
@@ -82,9 +98,9 @@
   
   /* Estilos para el botón "Guardar como nota" en los comentarios */
   .platzi-save-comment-button {
-    margin-top: 5px;
+    margin-top: 0px;
     padding: 5px 10px;
-    background-color: #0070f3;
+    background-color: #1E2229;
     color: #fff;
     border: none;
     border-radius: 4px;
@@ -92,6 +108,6 @@
   }
   
   .platzi-save-comment-button:hover {
-    background-color: #005bb5;
+    background-color: #2f3239;
   }
   

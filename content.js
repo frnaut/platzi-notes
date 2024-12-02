@@ -152,8 +152,7 @@
       notesArea.style.right = "0";
       notesArea.style.width = "400px";
       notesArea.style.height = "calc(100% - 60px)";
-      notesArea.style.backgroundColor = "#fff";
-      notesArea.style.borderLeft = "1px solid #ccc";
+      notesArea.style.backgroundColor = "#1E2229";
       notesArea.style.zIndex = "10000";
       notesArea.style.padding = "10px";
       notesArea.style.boxShadow = "-4px 0 6px rgba(0, 0, 0, 0.1)";
@@ -216,7 +215,7 @@
         notesListArea.style.right = "0";
         notesListArea.style.width = "400px";
         notesListArea.style.height = "calc(100% - 60px)";
-        notesListArea.style.backgroundColor = "#fff";
+        notesListArea.style.backgroundColor = "#1E2229";
         notesListArea.style.borderLeft = "1px solid #ccc";
         notesListArea.style.zIndex = "10001";
         notesListArea.style.padding = "10px";
@@ -348,7 +347,7 @@
             if (noteIndex !== -1) {
               notesArray[noteIndex].content = noteContent;
               notesArray[noteIndex].timestamp = new Date().toISOString(); // Actualizar el timestamp
-              alert("¡Nota actualizada!");
+              // alert("¡Nota actualizada!");
             }
             editingNoteId = null; // Reiniciar el ID de edición
           } else {
@@ -371,7 +370,7 @@
             }
   
             notesArray.push(newNote);
-            alert("¡Nota guardada!");
+            // alert("¡Nota guardada!");
           }
   
           chrome.storage.local.set({ allPlatziNotes: notesArray }, () => {
@@ -447,13 +446,13 @@
   
         // Crear el botón
         const saveButton = document.createElement('button');
-        saveButton.className = 'Button platzi-save-comment-button';
-        saveButton.innerText = 'Guardar como nota';
+        saveButton.className = 'platzi-save-comment-button';
+        saveButton.innerText = 'Guardar';
   
         // Estilos opcionales para el botón
-        saveButton.style.marginTop = '5px';
+        saveButton.style.marginTop = '0px';
         saveButton.style.padding = '5px 10px';
-        saveButton.style.backgroundColor = '#0070f3';
+        saveButton.style.backgroundColor = '#1E2229';
         saveButton.style.color = '#fff';
         saveButton.style.border = 'none';
         saveButton.style.borderRadius = '4px';
