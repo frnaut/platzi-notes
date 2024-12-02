@@ -44,7 +44,7 @@ Para instalar la extensión Platzi Notes, sigue estos pasos:
 
    - Clona el repositorio usando Git:
      ```bash
-     git clone https://github.com/tuusuario/platzi-notes-extension.git
+     git clone https://github.com/frnaut/platzi-notes.git
      ```
    - O descarga el archivo ZIP y extráelo en una carpeta en tu computadora.
 
