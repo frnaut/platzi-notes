@@ -1,17 +1,21 @@
 {
-    "manifest_version": 3,
-    "name": "Platzi Notes",
-    "version": "1.5",
-    "description": "Extensión para tomar y gestionar notas mientras estudias en Platzi.",
-    "permissions": ["storage", "activeTab", "scripting"],
-    "host_permissions": ["https://platzi.com/*"],
-    "content_scripts": [
-      {
-        "matches": ["https://platzi.com/*"],
-        "js": ["content.js"],
-        "css": ["styles.css"],
-        "run_at": "document_idle"
-      }
-    ]
+  "manifest_version": 3,
+  "name": "Platzi Notes",
+  "version": "1.5",
+  "description": "Extensión para tomar y gestionar notas mientras estudias en Platzi.",
+  "permissions": ["storage", "activeTab", "scripting"],
+  "host_permissions": ["https://platzi.com/*"],
+  "content_scripts": [
+    {
+      "matches": ["https://platzi.com/*"],
+      "js": ["content.js"],
+      "css": ["styles.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "icons": {
+    "16": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
   }
-  
+}
