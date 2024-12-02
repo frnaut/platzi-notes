@@ -74,26 +74,26 @@
         tabButton.style.gap = "4px";
   
         // Crear el ícono SVG
-        const svgNS = "http://www.w3.org/2000/svg";
-        const svg = document.createElementNS(svgNS, "svg");
-        svg.setAttribute("width", "1em");
-        svg.setAttribute("height", "1em");
-        svg.setAttribute("fill", "none");
-        svg.setAttribute("viewBox", "0 0 20 20");
+        // const svgNS = "http://www.w3.org/2000/svg";
+        // const svg = document.createElementNS(svgNS, "svg");
+        // svg.setAttribute("width", "1em");
+        // svg.setAttribute("height", "1em");
+        // svg.setAttribute("fill", "none");
+        // svg.setAttribute("viewBox", "0 0 20 20");
   
-        const path = document.createElementNS(svgNS, "path");
-        path.setAttribute("fill", "#fff");
-        path.setAttribute("fill-rule", "evenodd");
-        path.setAttribute("d", "M5 3h10v14H5V3zm1 1v12h8V4H6z");
-        path.setAttribute("clip-rule", "evenodd");
+        // const path = document.createElementNS(svgNS, "path");
+        // path.setAttribute("fill", "#fff");
+        // path.setAttribute("fill-rule", "evenodd");
+        // path.setAttribute("d", "M5 3h10v14H5V3zm1 1v12h8V4H6z");
+        // path.setAttribute("clip-rule", "evenodd");
   
-        svg.appendChild(path);
+        // svg.appendChild(path);
   
         // Crear el texto del botón
         const buttonText = document.createTextNode("Notas");
   
         // Agregar el ícono y el texto al botón
-        tabButton.appendChild(svg);
+        // tabButton.appendChild(svg);
         tabButton.appendChild(buttonText);
   
         // Agregar el botón de la pestaña al contenedor
